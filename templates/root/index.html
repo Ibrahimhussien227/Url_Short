@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Url Short</title>
+    <meta charset="utf-8" />
+    <title>URL Shortener</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
-    <form action="" method="GET">
-      <input type="text" name="full_url" />
-      <button type="submit">submit</button>
-    </form>
+    <div class="col-sm-8 col-sm-offset-1">
+      <h1>URL Shortener</h1>
+      <br />
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            type="text"
+            required
+            class="form-control"
+            name="full_url"
+            placeholder="Paste here the long URL here"
+          />
+        </div>
+        <button type="submit" class="btn btn-success">Shorten</button>
+      </form>
+      {% if short_url != full_url %}
+      <form>
+        <div class="alert alert-success">
+          Successfully shortened: {{ short_url }} <br /><span></span>
+        </div>
+        <div class="form-group">
+          <label for="name"> {{ full_url }}</label>
+        </div>
+      </form>
+      {% endif %}
+    </div>
   </body>
 </html>
